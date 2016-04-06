@@ -48,3 +48,9 @@ en:
     users:
       name: "Name"
       email: "Email"
+    breadcum:
+      home: "Home"
+      courses: "Courses"
+    view_detail: "View detail"
+    wait: "Waitting"
+

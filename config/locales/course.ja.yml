@@ -46,3 +46,8 @@ ja:
     users:
       name: "名"
       email: "Eメール"
+    breadcum:
+      home: "ホーム"
+      courses: "コース"
+    view_detail: "ビューの詳細"
+    wait: "等待"

@@ -1,4 +1,74 @@
 <% provide :title, t("subjects.subject") %>
-
-<%= render "shared/trainee_course_tab", active_tab: Settings.tabs.overview  %>
-<%= render "admin/courses/overview" %>
+<div class="row course-show">
+  <div class="col-md-9">
+    <div class="row course-breadcrumb">
+      <ol class="breadcrumb">
+        <li>
+          <%= link_to t("courses.breadcum.home"), root_url %>
+        </li>
+        <li>
+          <%= link_to t("courses.breadcum.courses"), "#" %>
+        </li>
+        <li class="active"><%= @course.name %></li>
+      </ol>
+    </div>
+    <div class="row">
+      <h2 id="course-h2-header">
+        <span id="course-header"><%= @course.name %></span>
+      </h2>
+      <p><%= @course.description %></p>
+    </div>
+    <div class="content-wrapper">
+      <section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="timeline">
+              <% @course_subjects.each do |item| %>
+                <li class="time-label">
+                    <span class="bg-red">
+                      <% if item.start_date? %>
+                        <%= item.start_date %> - <%= item.end_date %>
+                      <% else %>
+                        <%= t("courses.wait") %>
+                      <% end %>
+                    </span>
+                </li>
+                <li>
+                  <% if item.init? %>
+                    <i class="fa fa-thumbs-o-down bg-blue"></i>
+                  <% elsif item.progress? %>
+                    <i class="fa fa-hand-o-right bg-red"></i>
+                  <% else %>
+                    <i class="fa fa-thumbs-up bg-orange"></i>
+                  <% end %>
+                  <div class="timeline-item">
+                    <span class="time">
+                      <i class="fa fa-clock-o"></i><%= item.created_at.localtime %>
+                    </span>
+                    <h3 class="timeline-header">
+                      <a href="#"><%= item.subject.name %></a>
+                    </h3>
+                    <div class="timeline-body">
+                      <%= item.subject.description %>
+                    </div>
+                    <div class="timeline-footer">
+                      <%= link_to t("courses.view_detail"), "#",
+                        class: "btn btn-primary btn-xs" %>
+                      <% if item.init? %>
+                        <span class="btn btn-primary btn-xs"><%= item.status %></span>
+                      <% elsif item.progress? %>
+                        <span class="btn btn-danger btn-xs"><%= item.status %></span>
+                      <% else %>
+                        <span class="btn btn-default btn-xs"><%= item.status %></span>
+                      <% end %>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
